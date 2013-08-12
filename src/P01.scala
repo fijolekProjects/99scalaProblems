@@ -9,7 +9,7 @@ object P01 {
  	
  	def last2(xs: List[Int]): Int = {
  		if (xs.tail.isEmpty) xs.head
- 		else last2(xs.tail)
+ 		else last2(xs.tail) 
  	}                                         //> last2: (xs: List[Int])Int
  	last2(List(1,2,3,4,5))                   
  	
