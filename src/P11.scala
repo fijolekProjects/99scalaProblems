@@ -7,6 +7,10 @@ object P11 {
     case _ => Nil
   }                                               //> pack1: [A](xs: List[A])List[List[A]]
 
+  def encode3[A](xs: List[A]): List[(Int, A)] = {
+    pack1(xs).map(x => (x.length, x.head))
+  }                                               //> encode3: [A](xs: List[A])List[(Int, A)]
+
   def encodeModified2[A](xs: List[A]): List[Any] = {
     val packedXs = pack1(xs)
     packedXs.foldRight(List[Any]()) {
@@ -16,6 +20,7 @@ object P11 {
     }
   }                                               //> encodeModified2: [A](xs: List[A])List[Any]
   encodeModified2(list)                           //> res0: List[Any] = List((4,'a), 'b, (2,'c), (2,'a), 'd, (4,'e))
+
   def encodeModified3[A](xs: List[A]): List[Any] = {
     val packedXs = pack1(xs)
     packedXs.map {
@@ -27,4 +32,10 @@ object P11 {
 
   encodeModified3(list)                           //> res1: List[Any] = List((4,'a), 'b, (2,'c), (2,'a), 'd, (4,'e))
 
+  def encodeModified4[A](xs: List[A]): List[Any] = {
+    encode3(xs).map {
+      x => if (x._1 == 1) x._2 else x
+    }
+  }                                               //> encodeModified4: [A](xs: List[A])List[Any]
+  encodeModified4(list)                           //> res2: List[Any] = List((4,'a), 'b, (2,'c), (2,'a), 'd, (4,'e))
 }
