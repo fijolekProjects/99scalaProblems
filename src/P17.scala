@@ -28,4 +28,10 @@ object P17 {
   }                                               //> split4: [A](n: Int, xs: List[A])(List[A], List[A])
   split4(3, list)                                 //> res3: (List[Symbol], List[Symbol]) = (List('a, 'b, 'c),List('d, 'e, 'f, 'g, 
                                                   //| 'h, 'i, 'j, 'k))
+  def split5[A](n: Int, xs: List[A]): (List[A], List[A]) = {
+    val (part1, part2) = xs.zipWithIndex.partition(_._2 < n)
+    (part1 map(_._1), part2 map(_._1))
+  }                                               //> split5: [A](n: Int, xs: List[A])(List[A], List[A])
+  split5(3, list)                                 //> res4: (List[Symbol], List[Symbol]) = (List('a, 'b, 'c),List('d, 'e, 'f, 'g, 
+                                                  //| 'h, 'i, 'j, 'k))
 }
